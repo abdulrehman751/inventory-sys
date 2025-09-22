@@ -1,10 +1,10 @@
-const express=require("express");
-const{
+import express from "express";
+ import{
     getProducts,
     createProducts,
     updateProducts,
     deleteProducts,
-}=require("../controllers/productController")
+} from "../controllers/productController.js";
 
 const router=express.Router();
 
@@ -13,4 +13,4 @@ router.post("/",createProducts)
 router.put("/:id",updateProducts)
 router.delete("/:id",deleteProducts)
 
-module.exports=router;
+export default router;

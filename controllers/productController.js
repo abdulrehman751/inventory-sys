@@ -1,7 +1,7 @@
-const Product = require("../models/Product");
+import Product from "../models/Product.js";
 
 
-exports.getProducts = async (req, res) => {
+export const getProducts = async (req, res) => {
   try {
     const products = await Product.find()
     res.status(200).json(products)
@@ -11,7 +11,7 @@ exports.getProducts = async (req, res) => {
   }
 }
 
-exports.createProducts = async (req, res) => {
+export const createProducts = async (req, res) => {
   try {
     const { name, quantity, price, category } = req.body;
     const product = await Product.create({ name, quantity, price, category });
@@ -22,7 +22,7 @@ exports.createProducts = async (req, res) => {
   }
 }
 
-exports.updateProducts = async (req, res) => {
+export const updateProducts = async (req, res) => {
   try {
     const products = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
     if (!products)
@@ -34,7 +34,7 @@ exports.updateProducts = async (req, res) => {
 
 }
 
-exports.deleteProducts = async (req, res) => {
+export const deleteProducts = async (req, res) => {
   try {
     const products = await Product.findByIdAndDelete(req.params.id)
     if (!products) return res.status(404).json({ message: "Products not found" })

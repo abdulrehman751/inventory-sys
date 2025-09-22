@@ -9,7 +9,7 @@ app.use(cors())
 
 // OR allow specific frontend only
 app.use(cors({
-  origin: "http://localhost:3001",  // frontend ka URL
+  origin: "http://localhost:3000",  // frontend ka URL
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
