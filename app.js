@@ -13,12 +13,22 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+
 dotenv.config();
 connectDB();
 
 app.use(express.json());
 
 // Routes
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Server is running',
+    timestamp: new Date().toISOString()
+  });
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/products", userProducts);
