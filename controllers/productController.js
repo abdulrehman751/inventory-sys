@@ -17,6 +17,7 @@ export const createProducts = async (req, res) => {
 
 let imageUrl = "";
 if (req.file) {
+  console.log("File received:", req.file);
   const storageRef=ref(storage,`products/${Date.now()}_${req.file.originalname}`);
   const snapshot=await uploadBytes(storageRef,req.file.buffer);
   imageUrl=await getDownloadURL(snapshot.ref);
