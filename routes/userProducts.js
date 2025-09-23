@@ -5,11 +5,12 @@ import express from "express";
     updateProducts,
     deleteProducts,
 } from "../controllers/productController.js";
+import upload from "../middleware/uploadMiddleware.js";
 
 const router=express.Router();
 
 router.get("/",getProducts)
-router.post("/",createProducts)
+router.post("/", upload.single("image"),createProducts)
 router.put("/:id",updateProducts)
 router.delete("/:id",deleteProducts)
 

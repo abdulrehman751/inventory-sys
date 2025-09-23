@@ -3,10 +3,10 @@ import Product from "../models/Product.js";
 
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find()
-    res.status(200).json(products)
+    const products = await Product.find().sort({ createdAt: -1 })
+    res.status(200).json({message :"products fetch successfully" , status:"true", products})
   } catch (error) {
-    res.status(500).json({ message: error.message })
+    res.status(500).json({ message: error.message , status:"false" })
 
   }
 }
@@ -14,7 +14,18 @@ export const getProducts = async (req, res) => {
 export const createProducts = async (req, res) => {
   try {
     const { name, quantity, price, category } = req.body;
-    const product = await Product.create({ name, quantity, price, category });
+
+let imageUrl = "";
+if (req.file) {
+  const storageRef=ref(storage,`products/${Date.now()}_${req.file.originalname}`);
+  const snapshot=await uploadBytes(storageRef,req.file.buffer);
+  imageUrl=await getDownloadURL(snapshot.ref);
+}
+
+
+
+
+    const product = await Product.create({ name, quantity, price, category,imageUrl });
     res.status(201).json({message: "product create successfully" ,product});
   } catch (error) {
     res.status(500).json({ message: error.message });

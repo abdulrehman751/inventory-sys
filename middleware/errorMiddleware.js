@@ -1,6 +1,4 @@
-// middleware/errorMiddleware.js
 
-// Error handler middleware
 const errorHandler = (err, req, res, next) => {
   console.error(err.stack); // log error in console
 

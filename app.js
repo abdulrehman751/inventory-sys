@@ -34,6 +34,13 @@ app.get("/api/health", (req, res) => {
     timestamp: new Date().toISOString(),
   });
 });
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
+
+// route for form
+app.get("/add-product", (req, res) => {
+  res.render("addProduct");
+});
 
 app.use("/api/users", userRoutes);
 app.use("/api/products", protect, userProducts);
