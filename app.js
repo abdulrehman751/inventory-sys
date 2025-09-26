@@ -43,7 +43,8 @@ app.get("/add-product", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
-app.use("/api/products", protect, userProducts);
+app.use("/api/products", userProducts);
+console.log(Date.now())
 // middleware
 
  app.use(errorHandler)

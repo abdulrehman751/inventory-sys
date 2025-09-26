@@ -1,4 +1,7 @@
 import Product from "../models/Product.js";
+import {storage} from "../config/firebase.js";
+import {  ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 
 export const getProducts = async (req, res) => {
@@ -19,8 +22,8 @@ let imageUrl = "";
 if (req.file) {
   console.log("File received:", req.file);
   const storageRef=ref(storage,`products/${Date.now()}_${req.file.originalname}`);
-  const snapshot=await uploadBytes(storageRef,req.file.buffer);
-  imageUrl=await getDownloadURL(snapshot.ref);
+  const snapshot = await uploadBytes(storageRef,req.file.buffer);
+  imageUrl = await getDownloadURL(snapshot.ref);
 }
 
 
